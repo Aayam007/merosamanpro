@@ -1,0 +1,79 @@
+﻿
+@using MeroSaman.Models
+@model MeroSaman.Models.AdminProduct
+@{
+    ViewData["Title"] = "EditAdmin";
+}
+
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <div class="module-tabs">
+                        <h3>Product</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills  module-tabs" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+                <br />
+                <div class="form-control">
+                    <form action="/product/editadmin" method="post" enctype="multipart/form-data">
+                        <input type="hidden" name="ProductId" value="@Model.ProductId" />
+                        <div class="col-12">
+                            <div class="form-group col-md-6">
+                                <label for="Catagory">Catagory Name</label><br />
+                                <select required name="CatagoryId">
+                                    <option value="@Model.CatagoryId">@((ViewBag.catagory as IEnumerable<Catagory>).Where(x => x.CatagoryId == Model.CatagoryId).FirstOrDefault().Name)</option>
+                                    @foreach (var item in (ViewBag.catagory as IEnumerable<Catagory>))
+                                    {
+                                        @if (item.CatagoryId != Model.CatagoryId)
+                                        {
+                                            <option value="@item.CatagoryId">@item.Name</option>
+                                        }
+                                    }
+                                </select><br />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Product Name</label>
+                                <input name="Name" value="@Model.Name" class="form-control" required />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="your_name">Thumb Image</label><br />
+                                <input type="hidden" value="@Model.Image" name="Image" />
+                                <img src="@Model.Image" width="200" />
+
+                                <input type="file" asp-for="ImageUrl" />
+                                <label style="align-content:center">*If you Insert image Previous Image will Change</label>
+                            </div>
+
+
+                            <label class="control-label">IsActive</label><br />
+                            @if (Model.IsActive == true)
+                            {
+                                <input type="checkbox" name="IsActive" value="True" checked><span>Active</span><br /><br />
+                            }
+                            else
+                            {
+                                <input type="checkbox" name="IsActive"><span>Active</span><br /><br />
+                            }
+                            <span class="alert-danger" asp-for="AddedOn"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Edit" class="btn btn-success btn-sm" />
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        </div>
+
+</section>

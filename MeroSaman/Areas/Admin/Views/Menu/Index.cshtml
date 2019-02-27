@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MeroSaman.Core.Models.Menu>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<h4 align="right">
+    <a href="/MenuPermission/New"><i class="fa fa-universal-access" aria-hidden="true">MenuPermission</i> </a>
+    <a class="nav-link active" href="/Menu/New"><i class="fa fa-plus-square" aria-hidden="true">Add Menu</i> </a>
+</h4>
+<div>
+    <table class="table table-responsive table-striped table-bordered table-hover table-condensed ">
+        <thead>
+            <tr style="background-color:cadetblue">
+                <th style="width:200px; ">Name</th>
+                <th>IsActive</th>
+                <th>AddedOn</th>
+                <th style="width:100px">Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => item.Name)</td>
+                    <td>@Html.DisplayFor(model => item.IsActive)</td>
+                    <td>@Html.DisplayFor(model => item.AddedOn)</td>
+
+                    <td>
+                        <a href="/Catagory/EditCatagory?id=@item.MenuId"><i class="fa fa-pencil-square-o" aria-hidden="true" style="color:green;margin:5px; "></i></a>|
+                        <a href="/Catagory/DeleteCatagory?id=@item.MenuId"><i class="fa fa-trash-o" aria-hidden="true" style="color:red; margin:5px;"></i></a>
+                    </td>
+                </tr>
+
+            }
+        </tbody>
+    </table>
+</div>

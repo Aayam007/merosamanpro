@@ -1,0 +1,123 @@
+﻿
+@using MeroSaman.Models
+@model MeroSaman.Models.Product
+@{
+    ViewData["Title"] = "Edit";
+}
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Product</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form action="/product/edit" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="Catagory">Catagory Name</label><br />
+                    <select required name="CatagoryId">
+                        <option value="@Model.CatagoryId">@((ViewBag.catagory as IEnumerable<Catagory>).Where(x => x.CatagoryId == Model.CatagoryId).FirstOrDefault().Name)</option>
+                        @foreach (var item in (ViewBag.catagory as IEnumerable<Catagory>))
+                        {
+                            @if (item.CatagoryId != Model.CatagoryId)
+                            {
+                                <option value="@item.CatagoryId">@item.Name</option>
+                            }
+                        }
+                    </select><br />
+                </div>
+                <div class="form-group col-md-6">
+                    <label class="control-label">Product Name</label>
+                    <input name="Name" value="@Model.Name" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="ShortDescription">Short Description</label>
+                    <textarea asp-for="ShortDescription"></textarea>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Descripton">Descripton</label>
+                    <textarea asp-for="Descripton"></textarea>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="ManufactureBy">Manufacture By</label><br />
+                    <input type="text" asp-for="ManufactureBy" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Offer">Offer</label><br />
+                    <input type="text" asp-for="Offer" class="form-control">
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="price">Price</label><br />
+                    <input type="number" asp-for="Price" />
+                    <select id="priceunit" asp-for="PriceUnit">
+                        <option selected="selected">Unit</option>
+                        <option>kg</option>
+                    </select>
+
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="Quantity">Quantity</label><br />
+                    <input type="number" asp-for="Quantity" />
+                    <select id="QuantityUnit" asp-for="QuantityUnit">
+                        <option selected="selected">Unit</option>
+                        <option>kg</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="form-group col-md-6">
+                    <label for="your_pass">Thumb Images</label><br />
+                    <input type="hidden" value="@Model.Image" name="Image" />
+                    <img src="@Model.Image" width="200" height="200" />
+
+                    <input type="file" asp-for="ImageUrl" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="your_pass">Other Images</label><br />
+                    @foreach (var item in @ViewBag.imagelist)
+                    {
+                        <img src="@item.Image" width="200" height="200" />
+                    }
+
+                    <input type="file" multiple accept="image" asp-for="ImageList" />
+                </div>
+                <label style="align-content:center">*If you Insert image Previous Image will Change</label>
+            </div>
+            <div class="form-group col-md-12">
+                @*<label class="control-label">IsActive</label><br />*@
+
+                <input type="checkbox" name="IsActive" asp-for="IsActive"><span>Active</span><br /><br />
+
+                <span class="alert-danger" asp-for="AddedOn"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Edit" class="btn btn-success btn-sm" />
+            </div>
+        </form>
+    </div>
+  
+
+</section>
+
+
+

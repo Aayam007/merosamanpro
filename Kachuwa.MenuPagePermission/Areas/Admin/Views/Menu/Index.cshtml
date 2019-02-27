@@ -1,0 +1,71 @@
+﻿@using Kachuwa.Web
+@using Kachuwa.Web.Model
+@using Kachuwa.KGrid
+@model IEnumerable<Menu>
+ @{
+    ViewData["Title"] = "Menu";
+}
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Menu</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="menu"><h4>OverView</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="menu/new"><h4>Add Menu</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="menu/permission"><h4>Add Permission</h4></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        <div class="panel-collapse" aria-labelledby="headingOne"
+             aria-expanded="true">
+            <div class="panel-body">
+                @(Html
+                              .CreateKachuwaGrid(Model)
+                              .Build(columns =>
+                              {
+                                  columns.Add(model => model.Name).SetTitle("Name");
+                                  columns.Add(model => model.Url).SetTitle("Url");
+                                  columns.Add(model => model.MenuOrder).SetTitle("Order");
+
+                                  columns.Add(model => model.IsActive).SetTitle("Is Active");
+                                  columns.Add(model => model.AddedOn).SetTitle("Added On");
+
+                              }).AddCommands(commands =>
+                                                    {
+                                  commands.Add("Edit", "Edit", "fa fa-pencil", "", "/menu/edit", model => model.MenuId);
+                                  commands.Add("Delete", "Delete", "fa fa-trash", "kachuwagrid.delete", Model => Model.MenuId,
+                                                      "/menu/delete");
+
+                              }).Css("table-hover")
+                              .Empty(@<div class="no-item-template">
+                                <div>
+                                    <h2>No Menus Found</h2>
+                                    <p>test</p>
+                                </div>
+                            </div>)
+                                                  .Pagination(pager =>
+                                                  {
+                                                      pager.CurrentPage = (int)ViewData["Page"];//later will come form view bag where page logic implemented
+                                                                      pager.Api = "/menu/page";
+                                                  })
+
+                )
+
+            </div>
+        </div>
+    </div>
+</section>
+

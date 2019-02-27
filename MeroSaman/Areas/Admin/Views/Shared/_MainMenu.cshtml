@@ -1,0 +1,21 @@
+﻿@*@using MeroSaman.Core.Models;
+@using System.Data.SqlClient;
+@using Dapper;
+@using Microsoft.Extensions.Configuration;
+@using System.Collections.Generic;
+@using System.Data;
+@using System.Linq;
+@using MeroSaman.Service;
+@inject IMenuService menuservice;
+
+<ul class="sidebar-menu" data-widget="tree">
+    <li class="header">HEADER</li>
+
+    @foreach (var item in await menuservice.GetMenuByPermission())
+    {
+
+        <li class="active"><a href="@item.Url"><i class="fa fa-link"></i> <span>@item.Name</span></a></li>
+
+    }
+    
+</ul>*@   

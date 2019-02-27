@@ -1,0 +1,145 @@
+﻿@using System.Collections.Generic
+@using System.Globalization
+@using Kachuwa.Localization
+@using System.Linq
+@model Kachuwa.Identity.ViewModels.LoginViewModel
+@inject SignInManager<Kachuwa.Identity.Models.IdentityUser> SignInManager
+@inject ILocaleResourceProvider LocaleResource;
+
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign In</title>
+
+    <!-- Font Icon -->
+    <link href="~/lib/forlogin/fonts/material-icon/css/material-design-iconic-font.css" rel="stylesheet" />
+
+
+    <!-- Main css -->
+    <link href="~/lib/forlogin/css/style.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/font-awesome.min.css" rel="stylesheet" />
+
+
+</head>
+<body>
+    <style>
+
+        .buttongo {
+            background-color: #3e8e41;
+            cursor: pointer;
+            background: #e72734;
+            border-radius: 5px;
+            border: none;
+        }
+        .buttonfa {
+            background-color: #3e8e41;
+            cursor: pointer;
+            background: #3b5998;
+            border-radius: 5px;
+            border: none;
+        }
+    </style>
+    <br />
+    <br />
+    <br />
+    <br>
+    <!-- Sing in  Form -->
+    <section class="sign-in">
+        <div class="container">
+            <div class="signin-content">
+                <div class="signin-image">
+
+                    <figure><img src="~/lib/forlogin/images/signin-image.jpg" alt="sing up image"></figure>
+                    <a href="register" class="signup-image-link">Create an account</a>
+                </div>
+
+                <div class="signin-form">
+                    <h2 class="form-title">Sign In</h2>
+                    <form class="register-form" id="login-form" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+                        <div class="form-group">
+
+                            <label for="your_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input type="email" required asp-for="Email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Enter Your Email Address" />
+                        </div>
+                        <div class="form-group">
+                            <label for="your_pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input type="password" required asp-for="Password" placeholder="******" class="form-control form-control-lg" id="exampleInputPassword1" />
+                        </div>
+                        <div class="form-group">
+                            <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                            <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>&nbsp;&nbsp;
+                            <a href="/account/forgotpassword" style="color:#f26b21" class="auth-link text-black"> Forgot password?</a>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                        </div>
+                        @Html.ValidationSummary()
+                    </form>
+
+                    @{
+                        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                        if (loginProviders.Count == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <label class="or-line" style="color: #999; margin-bottom: 40px; margin-top: 10px;"></label>
+                            <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+
+                                <span class="social-label">Or login with</span><br />
+
+                                @foreach (var provider in loginProviders)
+                                {
+                                    if (provider.Name == "Facebook")
+                                    {
+
+
+                                        <button type="submit" name="provider" class="buttonfa" value="@provider.Name">
+                                            <i class="display-flex-center zmdi zmdi-facebook"></i>
+                                        </button>
+
+                                    }
+                                    else if (provider.Name == "Google")
+                                    {
+                                        <button type="submit" name="provider" class="buttongo" value="@provider.Name">
+                                            <i class="display-flex-center zmdi zmdi-google"></i>
+                                        </button>
+                                    }
+
+                                }
+
+                            </form>
+                        }
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="~/lib/forlogin/vendor/jquery/jquery-ui.min.js"></script>
+    <script src="~/lib/forlogin/js/main.js"></script>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,324 @@
+﻿@model Kachuwa.Identity.ViewModels.UserViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = null;
+}
+<link href="~/Forhome/forlogin/style.css" rel="stylesheet" />
+<link href="~/Forhome/forlogin/style_.css" rel="stylesheet" />
+<link href="~/Forhome/forlogin/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Forhome/font-awesome/css/font-awesome.css" rel="stylesheet" />
+<link href="~/Forhome/forlogin/animate.css" rel="stylesheet" />
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="~/Forhome/css/style.css" rel="stylesheet" />
+<link href="~/Forhome/css/clientstyle.css" rel="stylesheet" />
+<link href="~/Forhome/css/lobibox.css" rel="stylesheet" />
+
+<style>
+    body {
+        font-family: 'Source Sans Pro';
+    }
+
+    .field-validation-error {
+        color: #999;
+        max-height: 0;
+        transition: 0.28s;
+        overflow: hidden;
+        color: #F26B21;
+        font-style: italic;
+    }
+
+    .code-link {
+        text-align: center;
+        display: block;
+        width: 100%;
+        background: transparent;
+        border: none;
+        color: #f26b21;
+        font-family: 'Source Sans Pro';
+    }
+
+    .code-box {
+        position: absolute;
+        top: 0px;
+        width: 100%;
+        display: none;
+    }
+
+    .code-div {
+        position: relative;
+    }
+
+    .btn-code {
+        background: #f26b21;
+        color: #fff;
+    }
+
+
+    .client-login-modal .modal-content .modal-img {
+        width: 384px !important;
+        display: inline-block;
+        vertical-align: bottom;
+        height: 568px !important;
+        background: #ddd;
+        padding: 0px 0px !important;
+        overflow: hidden;
+        background-color: #FBF9F2 !important;
+    }
+
+    .client-login-modal .modal-content {
+        border-radius: 10px !important;
+    }
+
+    section.login-next {
+        /* background-color: #eee; */
+        min-height: 100vh;
+        padding-top: 80px;
+        background: linear-gradient(to right, #E49100, #F26B21);
+    }
+
+    .client-login-modal .modal-content .modal-img {
+        width: 384px !important;
+        display: inline-block;
+        vertical-align: bottom;
+        height: 568px !important;
+        background: #ddd;
+        padding: 0px 0px !important;
+        overflow: hidden;
+        background-color: #FBF9F2 !important;
+    }
+
+    .client-login-modal .modal-content {
+        border-radius: 10px !important;
+    }
+
+    section.login-next {
+        background-color: #eee;
+        min-height: 100vh;
+        padding-top: 80px;
+    }
+
+        section.login-next .login-box {
+            background-color: #fff;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        section.login-next .client-login-modal .auth-form-light h6 {
+            text-align: center;
+            font-size: 15px;
+            letter-spacing: 0px;
+            color: #333;
+            text-transform: initial;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        section.login-next .client-login-modal .auth-form-light h4 {
+            text-align: center;
+            letter-spacing: 0px;
+            color: #333;
+            font-size: 35px;
+            text-transform: initial;
+        }
+
+        section.login-next .client-login-modal .form-group .form-control {
+            height: 45px;
+            box-shadow: none;
+            border: 1px solid #ccc;
+            border-radius: 40px !important;
+            padding: 1px 30px;
+            font-size: 14px;
+        }
+
+    .btn-login {
+        background-color: #bd081c;
+        width: 100%;
+        border-radius: 6px;
+        color: #fff;
+        font-weight: 700;
+        text-transform: capitalize;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        color: #999 !important;
+        font-size: 14px !important;
+    }
+
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        color: #999 !important;
+        opacity: 4;
+        font-size: 14px !important;
+    }
+
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        color: #999 !important;
+        opacity: 4;
+        font-size: 14px !important;
+    }
+
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #999 !important;
+        font-size: 14px !important;
+    }
+
+    ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #999 !important;
+        font-size: 14px !important;
+    }
+
+    ::placeholder { /* Most modern browsers support this now. */
+        color: #999 !important;
+        font-size: 14px !important;
+    }
+
+
+    section.login-next {
+        /* background-color: #eee; */
+        min-height: 100vh;
+        padding-top: 80px;
+        background: linear-gradient(to right, #E49100, #F26B21);
+    }
+
+    .modal-dialog {
+        right: auto;
+        left: unset !important;
+        width: 600px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    .validation-summary-errors {
+        color: red;
+        font-weight: 700;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $(".code-link").click(function () {
+            $(".code-box").toggle();
+        });
+    });
+</script>
+<body id="page-top" data-spy="scroll" data-target=".navbar-custom">
+    <section class="login-next">
+        <div class="container">
+            <div class="client-login-modal" id="client-login">
+                <div class="col-md-offset-4 col-lg-4 mx-auto" style="padding-left: 0px; padding-right: 0px;">
+                    <div class="login-box" style="padding: 50px 30px;">
+                        <a href="/Home">
+                            <div class="brand">
+                                <img src="~/MainAllImage/meropet logo test.png?h=300 && w=300" style="height: 80px;width: 80px;">
+                            </div>
+                        </a>
+                        <div class="auth-form-light p-5">
+                            <h4 class="text-center" style="font-size: 25px;text-align: center;margin: 15px auto;margin-bottom: 15px;color: #666;letter-spacing: 0px;margin-bottom: 30px;font-weight: 500;">Let's get started- It's free </h4>
+                            <h6 class="font-weight-light" style="color: #666;font-size: 20px;">WHO YOU ARE?</h6><br />
+                            <div class="col-md-4">
+                                <a href="/Account/Register" style="font-size:12px;font-weight:bold;color:#92989D" id="myforum">
+                                    <span class="dot" style=" height: 80px;width: 80px;background-color:#92989D;border-radius: 50%;display:inline-block;text-align: center;">
+                                        <img src="~/MainAllImage/dog-in-front-of-a-man (1).png?h=300 && w=300" style="width:56px;height:56px;margin-top:10px" />
+                                        <br />
+                                    </span>
+                                    <span style="font-size: 11px;">PET PARENT</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/Account/RegisterServiceProvider" style="font-size:12px;font-weight:bold;color:#f16b23" id="myforum">
+                                    <span class="dot" style=" height: 80px;width: 80px;background-color:#f16b23;border-radius: 50%;display:inline-block;text-align: center;">
+                                        <img src="~/MainAllImage/hospital-buildings (1).png?h=300 && w=300" style="width:56px;height:56px;margin-top:10px" />
+                                    </span>
+                                    <span style="font-size: 11px;">VETERINARY</span>
+                                </a>
+                            </div>
+                            <div class="col-md-4">
+                                <a href="/Account/Doctor" style="font-size:12px;font-weight:bold;color:#92989D" id="myforum">
+                                    <span class="dot" style=" height: 80px;width: 80px;background-color:#92989D;border-radius: 50%;display:inline-block;text-align: center;">
+                                        <img src="~/MainAllImage/doctor (1).png?h=300 && w=300" style="width:56px;height:56px;margin-top:10px" />
+                                    </span>
+                                    <span style="font-size: 11px;">VETERINARIAN</span>
+                                </a>
+                                <br />
+                                <br />
+                            </div>
+
+                            <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <input asp-for="FirstName" type="text" required class="form-control input-lg" id="exampleInputUsername1" placeholder="Name of Organization" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <select class="form-control" id="ServiceProviderTypeId" name="ServiceProviderTypeId" style="border: 1px solid #ccc; border-radius: 40px !important;padding: 1px 30px;font-size: 14px;">
+                                            <option value="">Select  Type</option>
+                                            @foreach (var item in @ViewBag.serviceprovidertype)
+                    {
+                        <option value="@item.ServiceProviderTypeId">@item.Name</option>
+}
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <input type="email" asp-for="Email" class="form-control input-lg" required id="exampleInputEmail" placeholder="Email">
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <input asp-for="PhoneNumber" required class="form-control input-lg" maxlength="10" minlength="10" placeholder="Phone Number" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <input name="password" required class="form-control input-lg" type="password" placeholder="Password (8 or more characters)" />
+                                            <span asp-validation-for="Password" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="form-group">
+                                            <input name="ConfirmPassword" required class="form-control input-lg" type="password" placeholder="Confirm Password" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 text-left">
+                                        <div class="form-group">
+                                            <input required class="" name="remember" id="remember1" type="checkbox">
+                                            In order to Register, you must agree to our <a href="/TermsAndConditions" target="_blank">Terms and Conditions,</a> <a href="/PrivacyPolicies" target="_blank">Privacy Policy</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationSummary()
+                                <br />
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <button type="submit" class="btn btn-pet btn-block btn-lg" style="border-radius: 40px !important; padding: 10px; margin-bottom: 20px; text-transform:uppercase !important;background:linear-gradient(to right, #E49100, #F26B21);">Sign Up</button>
+                                    </div>
+                                </div>
+                                <label class="or-line" style="color: #999; margin-bottom: 40px; margin-top: 10px;">OR</label>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="/account/login" class="btn btn-google btn-block btn-lg" style="border-radius: 40px; text-align: center;background:#272B2C;text-transform: uppercase;padding: 10px;font-size: 1.875rem;">Login</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

@@ -1,0 +1,54 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Areas\Admin\Views\MenuPermission\Index.cshtml" />
+    <None Remove="Areas\Admin\Views\Menu\Edit.cshtml" />
+    <None Remove="Areas\Admin\Views\Menu\Index.cshtml" />
+    <None Remove="Areas\Admin\Views\Menu\New.cshtml" />
+    <None Remove="Areas\Admin\Views\PagePermission\Index.cshtml" />
+    <None Remove="Areas\Admin\Views\Page\Config.cshtml" />
+    <None Remove="Areas\Admin\Views\Page\Edit.cshtml" />
+    <None Remove="Areas\Admin\Views\Page\Index.cshtml" />
+    <None Remove="Areas\Admin\Views\Page\New.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Areas\Admin\Views\MenuPermission\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Admin\Views\Menu\Edit.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Menu\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Menu\New.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\PagePermission\Index.cshtml" />
+    <EmbeddedResource Include="Areas\Admin\Views\Page\Config.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Page\Edit.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Page\Index.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Page\New.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kachuwa\Kachuwa.Admin\Kachuwa.Admin.csproj" />
+    <ProjectReference Include="..\Kachuwa\Kachuwa.Core\Kachuwa.Core.csproj" />
+    <ProjectReference Include="..\Kachuwa\Kachuwa.Web\Kachuwa.Web.csproj" />
+  </ItemGroup>
+
+</Project>

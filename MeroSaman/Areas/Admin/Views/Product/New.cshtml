@@ -1,0 +1,126 @@
+﻿@model MeroSaman.Models.Product
+@{
+    ViewData["Title"] = "New";
+}
+
+<script src="https://cloud.tinymce.com/5/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <div class="module-tabs">
+                        <h3>Product</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills  module-tabs" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+                <br />
+                <div class="form-control">
+                    <form class="register-form" id="login-form" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="your_name">Catagory Name</label>
+                                <select class="form-control" asp-for="CatagoryId">
+                                    <option value="">Select Catagory</option>
+                                    @foreach (var item in ViewBag.catagory)
+                                    {
+                                        <option value="@item.CatagoryId">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="your_pass">Product Name</label>
+                                <select class="form-control js-example-tags" id="productlist" asp-for="Name">
+                                    <option selected="selected"></option>
+                                    @foreach (var item in ViewBag.product)
+                                    {
+                                        <option value="@item.ProductId">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="ShortDescription">Short Description</label>
+                                <textarea asp-for="ShortDescription"></textarea>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Descripton">Descripton</label>
+                                <textarea asp-for="Descripton"></textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="ManufactureBy">Manufacture By</label><br />
+                                <input type="text" asp-for="ManufactureBy" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Offer">Offer</label><br />
+                                <input type="text" asp-for="Offer" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="price">Price</label><br />
+                                <input type="number" asp-for="Price" />
+                                <select id="priceunit" asp-for="PriceUnit">
+                                    <option selected="selected">Unit</option>
+                                    <option>kg</option>
+                                </select>
+
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="Quantity">Quantity</label><br />
+                                <input type="number" asp-for="Quantity" />
+                                <select id="QuantityUnit" asp-for="QuantityUnit">
+                                    <option selected="selected">Unit</option>
+                                    <option>kg</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="your_name">Thumb Image</label>
+                                <input type="file" asp-for="ImageUrl" />
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="your_pass">Other Images</label>
+                                <input type="file" multiple accept="image" asp-for="ImageList" />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                           
+                            <div class="form-group col-md-6">
+                                <label for="your_pass">IsActive</label>
+                                <input type="checkbox" asp-for="IsActive" class="mycheck" />
+
+                                @*@Html.CheckBoxFor(x => x.IsActive)*@
+                            </div>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" id="signin" class="form-submit" value="Save" />
+                        </div>
+                        @Html.ValidationSummary()
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+    $(".js-example-tags").select2({
+        tags: true
+    });   
+</script>

@@ -1,0 +1,49 @@
+﻿
+@using Kachuwa.Web
+@using Kachuwa.KGrid
+@model IEnumerable<MeroSaman.Models.Catagory>
+
+
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Category</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/Catagory"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="create-div">
+            <a class="form-control btn-add" href="/Catagory/new" style="background-color:#f26b21;text-align:center;width:250px;color:white;height:40px;float:right;">Create Catagory</a>
+        </div>
+        @(Html
+                       .CreateKachuwaGrid(Model)
+                       .Build(columns =>
+                       {
+                           columns.Add(model => model.Name).SetTitle("Name");
+                           columns.Add(model => model.IsActive).SetTitle("Active");
+                         
+                       }).AddCommands(commands =>
+                       {
+                           commands.Add("Edit", "Edit", "fa fa-pencil", "", "/Catagory/edit", model => model.CatagoryId);
+                           commands.Add("Delete", "Delete", "fa fa-trash", "kachuwagrid.delete", Model => Model.CatagoryId,
+                               "/Catagory/delete");
+
+                       }).Css("table-striped")
+                                 .Empty("No Catagory  added  yet.")
+                                 .Pagination(pager =>
+                                 {
+                                     pager.CurrentPage = (int)ViewData["Page"];
+                                     pager.Api = "/Catagory";
+                                 })
+        )
+    </div>
+</section>
+ 

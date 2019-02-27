@@ -1,0 +1,79 @@
+﻿@model MeroSaman.Models.Product
+@{
+    ViewData["Title"] = "SuperNew";
+}
+
+
+
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <div class="module-tabs">
+                        <h3>Product</h3>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills  module-tabs" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+                <br />
+                <div class="col-md-12">
+                    <form class="register-form" id="login-form" method="post" enctype="multipart/form-data">
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="your_name">Catagory Name</label>
+                                <select class="form-control" asp-for="CatagoryId">
+                                    <option value="">Select Catagory</option>
+                                    @foreach (var item in ViewBag.catagory)
+                                    {
+                                        <option value="@item.CatagoryId">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="your_pass">Product Name</label>
+                                <select class="form-control js-example-tags" id="productlist" asp-for="Name">
+                                    <option selected="selected"></option>
+                                    @foreach (var item in ViewBag.product)
+                                    {
+                                        <option value="@item.ProductId">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                      
+
+                        
+                       
+
+                        <div class="col-md-12">
+                            <div class="form-group col-md-6">
+                                <label for="your_name">Thumb Image</label>
+                                <input type="file" asp-for="ImageUrl" />
+                            </div>
+
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" id="signin" class="form-submit" value="Save" />
+                        </div>
+                        @Html.ValidationSummary()
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+<script>
+
+    $(".js-example-tags").select2({
+        tags: true
+    });
+
+</script>

@@ -1,0 +1,118 @@
+﻿@using Kachuwa.Web.Model 
+@model MenuPermission
+@{
+    ViewData["Title"] = "Menu Permission";
+    List<MenuPermission> viewBagData = ViewBag.ActualData;
+}
+<style>
+    .lala {
+        height: 700px !important;
+        overflow: scroll;
+    }
+
+    thead th {
+        position: sticky;
+        position: -webkit-sticky;
+        top: -10px;
+        background: white;
+        z-index: 10;
+    }
+</style>
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Menu</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/menu"><h4>OverView</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/menu/new"><h4>Add Menu</h4></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/menu/permission"><h4>Add Permission</h4></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <br />
+            <br />
+        </div>
+        <table id="table" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>
+                        Menu List
+                    </th>
+                    @{
+                        foreach (var itm in Model.RoleLists)
+                        {
+                            <th>
+                                @itm.Name
+                            </th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var itm1 in Model.Menulists)
+                    {
+                        <tr>
+                            <td>
+                                <label data-val="true" name="myrole" id="@itm1.MenuId" value="@itm1.MenuId"> @itm1.Name</label>
+                            </td>
+                            @{
+                                foreach (var itm in Model.RoleLists)
+                                {
+                                    <td>
+                                        @{
+                                            var resultCount = viewBagData.Where(x => x.MenuId == itm1.MenuId && x.RoleId == itm.Id);
+                                            if (resultCount.Any())
+                                            {
+                                                <input data-val="true" class="mycheck" type="checkbox" checked="checked" name="myrole" id="@itm.Id" value="@itm.Id">
+                                            }
+                                            else
+                                            {
+                                                <input data-val="true" class="mycheck" type="checkbox" name="myrole" id="@itm.Id" value="@itm.Id">
+                                            }
+                                        }
+                                    </td>
+                                }
+                            }
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</section>
+@section Scripts{
+    <script>
+        $('.mycheck').click(function () {
+            debugger
+            var roleid = $(this).val();
+            var menuid = $(this).closest('tr').find('td:eq(0)').find('label').attr('value');
+            var hasPerrmission = $(this).is(":checked") ? true : false;
+            $.ajax({
+                type: "POST",
+                url: "/admin/menu/permission/new",
+                data: {
+                    model: {
+                        Roleid: roleid,
+                        Menuid: menuid,
+                        AllowAccess: hasPerrmission
+                    }
+                },
+                cache: false,
+                dataType: "json",
+                success: function (json) {
+                }
+            });
+        });
+    </script>
+}

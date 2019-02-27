@@ -1,0 +1,225 @@
+﻿@model MeroSaman.Core.Models.Menu
+@{
+    ViewData["Title"] = "New";
+}
+
+<h2>New</h2>
+
+<section class="content-header">
+    <section>
+        <h2>Add Menu</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="New" asp-controller="Menu" method="post">
+                    <section name="section1" class="col-md-12">
+
+
+                        <p class="formpanel-help">Create a new menu</p>
+
+                        <div class="row">
+
+                            <div class="col-md-12">
+                                <div class="form-description">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+
+                                <div class="forminput-section">
+                                    <div class="row">
+                                        <div>
+
+
+                                            <div>
+
+                                                <div>
+                                                    <div>
+
+
+
+                                                        <input type="hidden" value="0" name="MenuId" data-val="true" data-val-required="The MenuId field is required.">
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_Name">Name</label>
+
+                                                        <input name="Name" type="text" class="form-control keychange" id="pageForm_Name" data-val="true" data-val-required="The Name field is required." value="" placeholder="Enter Name">
+                                                        <span class="field-validation-valid" data-valmsg-for="Name" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_SubTitle">Sub Title</label>
+
+                                                        <input name="SubTitle" type="text" class="form-control" id="pageForm_SubTitle" value="" placeholder="Enter Sub Title">
+                                                        <span class="field-validation-valid" data-valmsg-for="SubTitle" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_Url">Url</label>
+                                                        <i class="fa fa-question-circle input-description" data-toggle="tooltip" data-placement="bottom" title="enter redirection link when user clicks to menu"></i>
+
+                                                        <input name="Url" type="text" class="form-control urlchange" id="pageForm_Url" value="" placeholder="Enter Url">
+                                                        <span class="field-validation-valid" data-valmsg-for="Url" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_GroupName">Group Name</label>
+
+                                                        <input name="GroupName" type="text" class="form-control" id="pageForm_GroupName" data-val="true" data-val-required="The GroupName field is required." value="" placeholder="Enter Group Name">
+                                                        <span class="field-validation-valid" data-valmsg-for="GroupName" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_Icon">Icon</label>
+                                                        <i class="fa fa-question-circle input-description" data-toggle="tooltip" data-placement="bottom" title="enter icon name from material design icons set"></i>
+
+                                                        <input name="Icon" type="text" class="form-control" id="pageForm_Icon" value="" placeholder="Enter Icon Name">
+                                                        <span class="field-validation-valid" data-valmsg-for="Icon" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_MenuOrder">Menu Order</label>
+                                                        <i class="fa fa-question-circle input-description" data-toggle="tooltip" data-placement="bottom" title="menu order at which menu are displayed according to number"></i>
+
+                                                        <input type="number" class="form-control" id="pageForm_MenuOrder" data-val="true" data-val-required="The MenuOrder field is required." name="MenuOrder" value="0">
+                                                        <span class="field-validation-valid" data-valmsg-for="MenuOrder" data-valmsg-replace="true"></span>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_IsChild">IsChild</label>
+
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="IsChild" value="false" data-val="true" data-val-required="The IsChild field is required.">
+                                                            <div class="switchslider round"></div>
+                                                        </label>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                               
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_IsBackend">Is Backend Menu</label>
+                                                        <i class="fa fa-question-circle input-description" data-toggle="tooltip" data-placement="bottom" title="select if menu is for admin dashboard"></i>
+
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="IsBackend" value="false" data-val="true" data-val-required="The IsBackend field is required.">
+                                                            <div class="switchslider round"></div>
+                                                        </label>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="fromdiv-inline">
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+
+                                                        <label for="pageForm_IsActive">Is Active</label>
+
+                                                        <label class="switch">
+                                                            <input type="checkbox" name="IsActive" value="false" data-val="true" data-val-required="The IsActive field is required.">
+                                                            <div class="switchslider round"> </div>
+                                                        </label>
+
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <div class="form-group">
+                        <input type="submit" value="Add Catagory" class="btn btn-success btn-sm" />
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8">
+
+            </div>
+        </div>
+        <div>
+            <a asp-action="Index">Back To Home</a>
+        </div>
+    </section>
+</section>

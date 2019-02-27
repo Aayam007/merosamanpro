@@ -1,0 +1,55 @@
+﻿
+@using Kachuwa.Web
+@using Kachuwa.KGrid
+@model IEnumerable<MeroSaman.Models.Product>
+
+@{
+    ViewData["Title"] = "Product";
+}
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Product</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="create-div">
+            <a class="form-control btn-add" href="/product/new" style="background-color:#f26b21;text-align:center;width:250px;color:white;height:40px;float:right;">Create Product</a>
+        </div>
+        @(Html
+                                       .CreateKachuwaGrid(Model)
+                                       .Build(columns =>
+                                       {
+                                           columns.Add(model => model.Name).SetTitle("Name");
+                                           columns.Add(model => model.CatagoryName).SetTitle("CatagoryName");
+                                           columns.Add(model => new { model.Image })
+                                             .Encoding(false)
+                                            .Template("<div ><img src='{{Image}}'   width=\"80\" /></div>").SetTitle("Image");
+
+                                           columns.Add(model => model.IsActive).SetTitle("Active");
+
+                                       }).AddCommands(commands =>
+                                       {
+                                           commands.Add("Edit", "Edit", "fa fa-pencil", "", "/product/edit", model => model.ProductId);
+                                           commands.Add("Delete", "Delete", "fa fa-trash", "kachuwagrid.delete", Model => Model.ProductId,
+                                               "/product/delete");
+
+                                       }).Css("table-striped")
+                                                 .Empty("No product  added  yet.")
+                                                 .Pagination(pager =>
+                                                 {
+                                                     pager.CurrentPage = (int)ViewData["Page"];
+                                                     pager.Api = "/product";
+                                                 })
+        )
+    </div> 
+</section>

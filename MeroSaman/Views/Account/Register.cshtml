@@ -1,0 +1,286 @@
+﻿@model Kachuwa.Identity.ViewModels.UserViewModel
+@inject SignInManager<Kachuwa.Identity.Models.IdentityUser> SignInManager
+
+@{
+    ViewData["Title"] = "Register";
+
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up</title>
+    <link href="~/lib/forlogin/fonts/material-icon/css/material-design-iconic-font.css" rel="stylesheet" />
+    <link href="~/lib/forlogin/css/style.css" rel="stylesheet" />
+
+</head>
+<body>
+    <br />
+    <br />
+    <br />
+    <section class="signup">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-form">
+                    <h2 class="form-title">Sign Up</h2>
+                    <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="login-form" class="register-form">
+
+                        <div class="form-group">
+                            <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                            <input asp-for="FirstName" class="form-control" id="name" placeholder="Your Name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="zmdi zmdi-email"></i></label>
+                            <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Your Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+
+                        </div>
+                        <div class="form-group">
+                            <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                            <input asp-for="Password" type="password" class="form-control" id="pass" placeholder="Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                            <input asp-for="ConfirmPassword" class="form-control" id="re_pass" placeholder="Repeat your password" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="re-pass"><i class="zmdi zmdi-phone"></i></label>
+                            <input asp-for="PhoneNumber" class="form-control" type="number" minlength="10" maxlength="10" id="Contact" placeholder="Your Contact" />
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+
+
+                        </div>
+
+                        <div class="form-group">
+                            <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                            <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                        </div>
+                        <div class="form-group form-button">
+                            <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+
+                        </div>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                    </form>
+                    @{
+                        var loginProviders = (await SignInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+                        if (loginProviders.Count == 0)
+                        {
+                            <div>
+                                <p>
+                                    There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                                    for details on setting up this ASP.NET application to support logging in via external services.
+                                </p>
+                            </div>
+                        }
+                        else
+                        {
+
+                            <label class="or-line" style="color: #999; margin-bottom: 40px; margin-top: 10px;"></label>
+                            <form asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal">
+
+                                <span class="social-label">Or login with</span><br />
+
+                                @foreach (var provider in loginProviders)
+                                {
+                                    if (provider.Name == "Facebook")
+                                    {
+
+
+                                        <button type="submit" name="provider" class="buttonfa" value="@provider.Name">
+                                            <i class="display-flex-center zmdi zmdi-facebook"></i>
+                                        </button>
+
+                                    }
+                                    else if (provider.Name == "Google")
+                                    {
+                                        <button type="submit" name="provider" class="buttongo" value="@provider.Name">
+                                            <i class="display-flex-center zmdi zmdi-google"></i>
+                                        </button>
+                                    }
+
+                                }
+
+                            </form>
+                        }
+                    }
+                </div>
+                <div class="signup-image">
+                    <figure>
+                        <img src="~/lib/forlogin/images/signup-image.jpg" alt="sing up image">
+                    </figure>
+                    <a href="login" class="signup-image-link">I am already member</a>
+                    <a href="RegisterStore" class="signup-image-link">Are you a Store/Shop?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
+
+
+
+@*<body id="login-form">
+    <div class="container">
+        <br /><br /><br /><br /><br /><br />
+        <div class="login-form">
+            <div class="main-div">
+
+                <h2>Customer Register</h2>
+
+                <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="login-form">
+                    <h4>Create a new account.</h4>
+                    <hr />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input asp-for="FirstName" class="form-control" placeholder="First Name" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group"></div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>ConfirmPassword</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>PhoneNumber</label>
+                        <input asp-for="PhoneNumber" class="form-control" type="number" minlength="10" maxlength="10" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>*@
+@*<div class="form-group">
+        <label asp-for="Country"></label>
+        <select required name="Country" class="form-control">
+            <option value="">Select Country</option>
+            @foreach (var item in ViewBag.country)
+            {
+                <option value="@item.CountryId">@item.Name</option>
+            }
+        </select>
+        <span asp-validation-for="Country" class="text-danger"></span>
+    </div>*@
+@*<div class="form-group">
+        <label asp-for="State"></label>
+        <select required name="State" class="form-control">
+            <option value="">Select State</option>
+
+
+        </select>
+        <span asp-validation-for="State" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="District"></label>
+        <select required name="District" class="form-control">
+            <option value="">Select District</option>
+        </select>
+        <span asp-validation-for="District" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Municipality"></label>
+        <select required name="Municipality" class="form-control">
+            <option value="">Select Municipality</option>
+        </select>
+        <span asp-validation-for="Municipality" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Street"></label>
+        <input asp-for="Street" class="form-control" />
+        <span asp-validation-for="Street" class="text-danger"></span>
+    </div>*@
+@*<button type="submit" class="btn btn-default">Register</button>
+                    <br />
+                    <a href="/Account/Store">Are you A Store Keeper?</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    </body>*@
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    </body>
+    @section Scripts {
+        @await Html.PartialAsync("_ValidationScriptsPartial")
+    }
+    <script>
+        $('select[name="Country"]').change(function () {
+            var id = $(this).val();
+            $('select[name = "State"]').html("");
+            $.ajax({
+                type: 'GET',
+                url: '/state/countrylistbyId',
+                dataType: "json",
+                data: { id: id },
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        var list = '<option value="' + item.stateId + '">' + item.name + '</option>';
+                        $('select[name = "State"]').append(list);
+                    });
+                }
+            });
+        });
+        $('select[name="State"]').change(function () {
+            var id = $(this).val();
+            $('select[name = "District"]').html("");
+            $.ajax({
+                type: 'GET',
+                url: '/district/districtlistbyId',
+                dataType: "json",
+                data: { id: id },
+                success: function (data) {
+                    $.each(data, function (index, item) {
+
+                        var list = '<option value="' + item.districtId + '">' + item.name + '</option>';
+                        $('select[name = "District"]').append(list);
+                    });
+                }
+            });
+        });
+        $('select[name="District"]').change(function () {
+            var id = $(this).val();
+            $('select[name = "Municipality"]').html("");
+            $.ajax({
+                type: 'GET',
+                url: '/municipality/municipalitylistbyId',
+                dataType: "json",
+                data: { id: id },
+                success: function (data) {
+                    $.each(data, function (index, item) {
+
+                        var list = '<option value="' + item.municipalityId + '">' + item.name + '</option>';
+                        $('select[name = "Municipality"]').append(list);
+                    });
+                }
+            });
+        });
+
+    </script>*@

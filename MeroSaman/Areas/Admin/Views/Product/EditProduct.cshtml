@@ -1,0 +1,69 @@
+﻿@model MeroSaman.Models.Product
+@{
+    ViewData["Title"] = "EditProduct";
+}
+<section class="container-fluid p-o">
+    <div style="background:white">
+        <div class="col-md-12">
+            <div class="module-tabs">
+                <div class="col-md-3">
+                    <h1>Product</h1>
+                </div>
+                <div class="col-md-9">
+                    <ul class="nav nav-pills" style="float:right">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/product"><h3>Overview</h3></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <form asp-action="EditProduct" asp-controller="Product" method="post">
+            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+            <div class="form-group">
+                <label for="Catagory">Catagory Name</label><br />
+                <select required name="CatagoryId">
+                    <option value="@Model.CatagoryId">@((ViewBag.catagory as IEnumerable<Catagory>).Where(x => x.CatagoryId == Model.CatagoryId).FirstOrDefault().Name)</option>
+
+                    @foreach (var item in (ViewBag.catagory as IEnumerable<Catagory>))
+                    {
+                        @if (item.CatagoryId != Model.CatagoryId)
+                        {
+                            <option value="@item.CatagoryId">@item.Name</option>
+                        }
+                    }
+                </select><br />
+
+                <label class="control-label">Product Name</label>
+                <input name="Name" value="@Model.Name" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Descripton</label>
+                <textarea name="Descripton" value="@Model.Descripton" class="form-control" required>@Model.Descripton</textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">IsActive</label><br />
+                @if (Model.IsActive == true)
+                {
+                    <input type="checkbox" name="IsActive" value="True" checked><span>Active</span><br /><br />
+                }
+                else
+                {
+                    <input type="checkbox" name="IsActive"><span>Active</span><br /><br />
+                }
+
+                <span class="alert-danger" asp-for="AddedOn"></span>
+
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="EditCatagory" class="btn btn-success btn-sm" />
+            </div>
+        </form>
+    </div>
+   
+
+</section>
+
+

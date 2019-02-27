@@ -1,0 +1,34 @@
+{
+  "KachuwaAppConfig": {
+    "AppName": "MeroSaman",
+    "SiteUrl": "http://localhost:44355/",
+    "IsInstalled": true,
+    "DbProvider": "SQLServer",
+    "Framework": "",
+    "Version": "v1.0.0",
+    "EnableLogging": true,
+    "EnableDbLogging": false,
+    "Theme": "Default",
+    "AdminTheme": "Admin",
+    "FacebookAppId": "",
+    "RequireConfirmedEmail": true,
+    "PasswordLength": 8,
+    "RequireNonAlphanumeric": false,
+    "RequireUppercase": false,
+    "SMTMConfig": {
+      "Host": "smtp.gmail.com",
+      "UserName": "meropet.inc@gmail.com",
+      "Password": "Developer.meropet!12",
+      "UseSSL": true,
+      "Port": 587
+    }
+  },
+  "DapperIdentityCryptography": {
+    "Key": "FrFE/VtQ5pfNhGYVnyf65Sa6j4h6ion3It  kAnqLsnBE=",
+    "IV": "Ig/YU0tgUqI1u2VzWH0plQ=="
+  },
+  "Authentication:Google:ClientId": "1041771337326-v1no5dmeqn8dhdpuds8lonttntja5miu.apps.googleusercontent.com",
+  "Authentication:Google:ClientSecret": "C2skSqoPHRUKMmXHelnJikzh",
+  "Authentication:Facebook:AppId": "2287894224585315",
+  "Authentication:Facebook:AppSecret": "c574c7ee4ea58fa88f6a9b6dda4bbdfe"
+}
